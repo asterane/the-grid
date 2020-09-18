@@ -1,0 +1,55 @@
+﻿* Main Wall
+   * Individual Cubes (60x)
+      * Full color LEDs
+         * 4x 3W RGB LED
+            * https://cdn-shop.adafruit.com/product-files/2530/FD-3RGB-Y2.pdf
+            * 4 * 60 = 240 LEDs
+         * Power supply capable of ~2A
+            * Possibly current sources (LED drivers)
+            * Constant current source per LED (?)
+         * 0 to 100 red, green, and blue
+         * Instant digital control over levels
+            * Idea: 4x Arduino Mega / 1x Raspberry Pi
+            * Arduinos connected as slaves to RPi control
+            * Use software PWM to alter LED intensity
+         * Remote control from booth
+            * Wireless or wired connection from regular PC to RPi
+            * Address LEDs and alter levels
+            * Levels sent to appropriate Arduino
+            * Level altered by Arduino microcontroller
+         * Power off backstage connectors
+            * Something like 24 stage pins backstage
+            * 24 * 20 A = 480 A
+         * Heat sinking
+         * Simple wire harness!
+         * Extensive soldering
+      * Wood framing
+         * Around 24 feet of 2x4 lumber ( 60 * 24 = 1440 ft )
+         * 12 pieces
+      * Wood sheeting
+         * 4 sides of exterior, 24” x 24”
+         * Interior piece for LED mounting
+         * Circuitry on bottom
+         * Holes drilled for wires (?)
+      * Clear / diffuse front
+         * Plexiglas / polycarbonate
+         * Diffuser paper secured behind
+      * Ease of construction!
+         * Few connections
+         * Assembly line method
+   * Bolted together
+      * Short bolts / fewest possible
+   * Supports in rear
+      * Long 2x4s
+* Scrim Walls
+   * Appear like an empty frame of cubes
+   * Hanging transparent scrim in center for projections
+   * * Extension
+   * 24 ft x 6 ft x stage height; on wheels
+   * Composed of 4 - 6 ft x 6 ft x stage height blocks
+   * Long-lasting, fully walkable, and only moves when desired
+   * Come straight out from stage front to form long pit
+* Seat Cubes
+   * Provide a place for actors to sit ( & store items? ) onstage
+   * Simple rectangular prisms, tall enough to sit on, with handles cut into sides
+   * Possibly provide storage or ability to light up

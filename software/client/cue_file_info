@@ -1,0 +1,21 @@
+S4:label:0.0.0,0.0.0,0.0.0R0.0.0R...R...R...R F3 A5:label:4:0.0.0R0.0.0:0.0.0 F2 C3:0.0.0,0.0.0R0.0.0R0.0.0:0.0.0R0.0.0:0.0.0R0.0.0 
+
+cue, then transition to it
+
+F = fade, B = bottom up, L = left to right, R = right to left, K = snake, C = custom, N = none
+S = static, A = animation
+
+S4 = static number 4
+A5:4: = animation number 5 that takes 5 seconds
+
+F3 = fade that takes 3 seconds
+after S, rows separated by R, columns separated by ,, values separated by .
+
+C3 = custom transition that takes 3 seconds
+after C, everything is split by :, first thing is the length, everything else is the same as for a static grid
+
+must know what the interval is - 0.2??
+
+if it's 3 seconds and the interval is 0.5, have:
+0.5, 1, 1.5, 2, 2.5 for transition
+include 0 and 3 for animation

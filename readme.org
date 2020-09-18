@@ -1,0 +1,15 @@
+#+TITLE: The Grid
+#+OPTIONS: toc:nil
+
+* The Grid
+:PROPERTIES:
+:UNNUMBERED: notoc
+:END:
+
+[[file:./media/pictures/first_light_crop.jpg]]
+
+#+TOC: headlines
+
+
+* Under Construction
+This readme file will become much more extensive in the future.
