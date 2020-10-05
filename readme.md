@@ -1,6 +1,6 @@
 
 
-<a id="orge62f723"></a>
+<a id="org1affdc0"></a>
 
 # The Grid
 
@@ -9,27 +9,27 @@
 
 # Table of Contents
 
-1.  [Under Construction](#org1713911)
-2.  [Overview](#orga2aab8c)
-3.  [Project Goals](#org7ee83f0)
-    1.  [Overall](#org3464a96)
-    2.  [Design](#org5bf54ef)
-    3.  [Implementation](#orgf250bea)
-4.  [System](#org0f8cd66)
-5.  [Structure](#org9a5d6ec)
-6.  [Electronics](#orgbd5f41c)
-7.  [Software](#org0218b2f)
-8.  [Reflection](#org66b095f)
+1.  [Under Construction](#org36e0b87)
+2.  [Overview](#org138f860)
+3.  [Project Goals](#org91b989c)
+    1.  [Overall](#org6f5a60e)
+    2.  [Design](#org069cb31)
+    3.  [Implementation](#org06c6ddf)
+4.  [System](#org722d198)
+5.  [Structure](#orgebfdcf1)
+6.  [Electronics](#org42d862f)
+7.  [Software](#orgb3229b2)
+8.  [Reflection](#org93f03fa)
 
 
-<a id="org1713911"></a>
+<a id="org36e0b87"></a>
 
 # Under Construction
 
 This readme file will become much more extensive in the future.
 
 
-<a id="orga2aab8c"></a>
+<a id="org138f860"></a>
 
 # Overview
 
@@ -69,12 +69,12 @@ This readme file will become much more extensive in the future.
     software, for which I give her full credit
 
 
-<a id="org7ee83f0"></a>
+<a id="org91b989c"></a>
 
 # Project Goals
 
 
-<a id="org3464a96"></a>
+<a id="org6f5a60e"></a>
 
 ## Overall
 
@@ -92,7 +92,7 @@ This readme file will become much more extensive in the future.
     structures and electronics
 
 
-<a id="org5bf54ef"></a>
+<a id="org069cb31"></a>
 
 ## Design
 
@@ -118,7 +118,7 @@ This readme file will become much more extensive in the future.
     array during the show
 
 
-<a id="orgf250bea"></a>
+<a id="org06c6ddf"></a>
 
 ## Implementation
 
@@ -144,7 +144,7 @@ This readme file will become much more extensive in the future.
     necessary to stay on track
 
 
-<a id="org0f8cd66"></a>
+<a id="org722d198"></a>
 
 # System
 
@@ -320,39 +320,161 @@ This readme file will become much more extensive in the future.
 
 -   Software
     -   Microcontrollers
-        -   placeholder
+        -   Each cube had three colors of LED: red, green, and blue, which
+            had to be controlled independently
+        -   With 60 cubes and 3 colors per cube, 180 control channels were
+            needed to switch all of the LEDs
+        -   I needed cheap programmable boards with many 5 volt logic
+            outputs, so I went with the Arduino Mega
+        -   Since each Arduino has 54 logic outputs, we needed four of them
+            to cover the 180 channels that controlled the Grid
+        -   Each circuit board had three control inputs that were connected
+            to Arduino logic outputs
+        -   A HIGH signal turned on the LED, while a LOW signal kept it off
+        -   LEDs, of course, have no brightness controls, so it is necessary
+            to mediate the brightness by switching rapidly
+        -   By turning them on and off many times per second, but changing
+            the amount of time they are on during each second, the LEDs can
+            be made to appear to change in brightness
+        -   The ATmega processors used in the Arduino have a small number of
+            hardware PWM outputs, but I needed every output to be capable of
+            pulse width modulation
+        -   I ended up having to implement PWM dimming in software, writing
+            a program in C++ that switched the logic outputs many times
+            every second and dimmed the LEDs
+        -   This nearly did not work because the processors run at only 4
+            MHz, but the Arduinos were just fast enough
+        -   By dimming the different colors different amounts, any color
+            that is a combination of light colors may be achieved
+        -   It is necessary, during the show, to constantly communicate to
+            the Arduinos whether any colors need to be changed
+        -   They can receive data over a serial connection; luckily, the
+            computer we used to oversee them had four USB ports
+        -   Each Arduino kept a list containing the brightness of every one
+            of its channels
+        -   They were sent little "packets" over serial connection
+            consisting of a header for alignment, a channel number, and a
+            light intensity, each a single byte
+        -   On every PWM cycle, the boards checked for new packets and
+            changed the brightness of relevant channels accordingly
     
     -   Grid Server
-        -   placeholder
+        -   The four independent microcontrollers controlled the LEDs
+            themselves, but they needed to be overseen
+        -   For control of the entire Grid, a full fledged computer was
+            necessary, so we got a Raspberry Pi 4
+        -   This processor had a fast enough clock speed to communicate with
+            an operator's client program and all four Arduinos at once
+        -   It would be impractical for the Grid operator to be physically
+            next to it at all times, so it was necessary to be able to send
+            instructions about updating the display remotely
+        -   This component is called the Grid server because it "serves"
+            access to the Grid's physical display
+        -   While the LEDs are connected to the Arduinos with hundreds of
+            wires, the Arduinos connect to the server with only four USB
+            cables
+        -   The server itself, and by extension the entire Grid, is
+            controlled over an Ethernet connection
+        -   Our auditorium contains an isolated Ethernet network to control
+            the many lighting fixtures, and it has ports in several
+            convenient places, including backstage and the booth
+        -   The server computer was connected to a backstage Ethernet port
+            and assigned a static IP address
+        -   The operator's computer, running the client program, was
+            connected to an Ethernet port in the booth at the back of the
+            auditorium, where the Grid is fully visible
+        -   Listening on a TCP socket, the server made a connection with the
+            client and prepared to receive control data
+        -   Data came into the server in large chunks, with cube numbers
+            associated with RGB color values
+        -   The server mapped the cube numbers to the appropriate Arduinos
+            and logic outputs thereof, and sent off serial packets
+        -   Since packets were received over Ethernet and sent out over
+            serial almost constantly, I placed these functions in separate
+            threads so that they could run asynchronously
+        -   This server computer was the point of access to the entire Grid,
+            and I made an SSH connection into it and ran test and
+            troubleshooting programs on many occasions
     
     -   Grid Client
-        -   placeholder
+        -   I give full credit for this impressive piece of software to one
+            of my friends, a technician and actor who wrote it in just a
+            couple weeks and saved the Grid
+        -   It was important to have a piece of software from which the Grid
+            could be easily controlled
+        -   Just sending data remotely, however, is not nearly enough, as
+            entering data to be displayed as RGB images by hand would take a
+            prohibitively long time
+        -   Thus, we needed a program that provided a graphical interface to
+            the Grid: a list of cues to be replayed during shows, all
+            created using a software representation of the Grid on which
+            colors could be changed with a few clicks
+        -   We needed both a graphical user interface and extremely fast
+            development time, so we chose to use Python and the Qt framework
+        -   Python is not a great language for application development, but
+            it is quick to write and fast enough for this one time purpose
+        -   The Qt framework provides a system to build graphical interfaces
+            relatively easily, and bindings to the GUI components for use
+            within an event driven program
+        -   My friend built an interface that featured a scrollable cue list
+            with editable cue names and numbers
+        -   Next to the list was a representation of the Grid: 60 boxes,
+            colored according to the design stored in the selected cue
+        -   It was also possible to choose transitions between different
+            cues and set their length
+        -   The most used transition in our show was a smooth fade from one
+            design to another
+        -   An editing mode was included in the software, allowing the
+            operator to select any cube and set its color, then send the
+            result to the Grid for viewing
+        -   There was also a blind mode, enabling editing of cues without
+            changing what appeared on the Grid
+        -   One fantastic feature was the ability to create animations and
+            store them in a cue, which allowed effects like rain or a game
+            of Tetris to be created
+        -   All of the cues were stored in a custom text file format, which
+            was written by the software on every change and read on startup
+        -   The software used a small routine which I wrote to send packets
+            full of color data to the Grid server
+        -   The software was optimized with threading so that transitions
+            could be run, and packets sent, without causing the GUI to hang
+            and become unresponsive
+        -   I was the Grid operator during all four shows, and the Grid
+            client performed admirably throughout
 
 
-<a id="org9a5d6ec"></a>
+<a id="orgebfdcf1"></a>
 
 # Structure
 
+![img](structure/grid_3.jpg)
+
 // Finish
 
 
-<a id="orgbd5f41c"></a>
+<a id="org42d862f"></a>
 
 # Electronics
 
+![img](electronics/current-sources/finished_boards_3.jpg)
+
 // Finish
 
 
-<a id="org0218b2f"></a>
+<a id="orgb3229b2"></a>
 
 # Software
 
+![img](software/control_interface_2.png)
+
 // Finish
 
 
-<a id="org66b095f"></a>
+<a id="org93f03fa"></a>
 
 # Reflection
+
+![img](media/pictures/reflection.jpg)
 
 // Finish
 
