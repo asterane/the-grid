@@ -16,40 +16,90 @@ This readme file will become much more extensive in the future.
 
 
 * Overview
-// Convert to paragraphs
+By far my most challenging and ambitious engineering project up to its
+time, the Grid was a massive lighted display board which served as a
+set piece for the play in my senior year of high school. The image
+above shows the first time the entire Grid lit up at once. This
+display wall was composed of 60 wooden cubes, each two feet by two
+feet, for a total size of twenty feet at the base by twelve feet in
+height. Every cube contained four high power red-green-blue (RGB)
+light emitting diodes (LED) and acted as a single pixel.
 
-- We built a display wall composed of 60 wooden cubes, each containing
-  four high power RGB LEDs and acting as a pixel
-- This project was part of an ambitious set for a high school production of
-  The Curious Incident of the Dog in the Night-time
-- The system had many aspects, most of which I designed myself, and
-  oversaw the implementation of
-  - Each cube was a frame built out of 2 by 4 lumber, with a mounting
-    panel in the middle and diffusing plastic on the front
-  - Four high power LEDs were installed in each cube; all four in any
-    cube would always be the same color
-  - Current had to be supplied to the LEDs, so we built and connected
-    circuit boards by hand to drive them
-  - Power for the circuit boards came from power supplies that we
-    wired and fused ourselves
-  - Four Arduino microcontrollers controlled the brightness of 240
-    LEDs, and were in turn controlled by a Raspberry Pi
-  - Custom software to set the sequence of lights for the show ran on
-    my laptop, connected to the Pi
-- As well as the design and implementation, I also managed the finding
-  and acquisition of every component we needed
-- After three months of work, the Grid was completed on time and as
-  specified, ready for the show
-- The Grid was used for all four performances of our production,
-  providing a powerful backdrop for the characters
-- Our show was commended by critics for the technical feat, and we
-  would have won one of the region wide high school theatrical awards
-  for it had school not been canceled in March
-- While I was the lead engineer, I also worked with a team of great
-  people, without whom this project would not have been possible
-- One colleague of mine contributed more than any other, personally
-  writing thousands of lines of code to create the Grid client
-  software, for which I give her full credit
+A complex system, the Grid had many aspects, ranging from
+architectural design to electronics manufacturing. I was the lead
+engineer for the project; I designed every element of the Grid and its
+production process, and oversaw the implementation. I owned this
+project from conception to completion, keeping everything on schedule
+and managing a team of other students throughout the process. As well
+as engineering, I also managed the acquisition of all the components
+we needed, making sure the director purchased them when necessary.
+
+The various parts of the final product may be best understood by
+working backwards from our desired results. This project's goal was to
+construct an impressive lighted backdrop for a theatrical performance;
+we chose sixty pixels as an artistically and logistically appropriate
+resolution. Each pixel was a cube: a frame constructed of 2 by 4
+lumber with a mounting panel midway in, behind a sheet of diffusing
+plastic on the front. Four high power LEDs occupied each cube; all
+four in any cube were always the same color.
+
+Current had to be supplied to the LEDs, as they were simply packages
+with solder pads. We constructed and connected current sources by
+hand, one circuit board per cube, to drive the lights. Power for all
+these custom LED drivers came from ten power supplies that we wired
+with fuses ourselves, also by hand. Four Arduino microcontroller
+boards switched on and off the current sources, and in turn the
+LEDs. I wrote custom software to enable pulse width modulation on
+every pin of these boards, allowing full dimming of each pixel.
+
+All control signals were orchestrated by a Raspberry Pi computer that
+acted as a server, accepting packets of lighting data from a client
+computer and sending appropriate signals to the Arduinos to adjust the
+pixels' light levels. The client computer was a laptop held by the
+Grid operator, running custom software that provided a full graphical
+interface to the Grid. This application could edit and save lists of
+cues for shows; during each show, it sent thousands of frames to the
+Grid server including animations and automatically generated
+transitions.
+
+We used the Grid during performances of /The Curious Incident of the
+Dog in the Night-time/; it was the centerpiece of our technically
+ambitious set. Work began three months prior to the show, which was a
+short timeline for such a project considering that time in the
+workshop was mostly limited to weekday after school
+rehearsals. Nonetheless, we finished the Grid on time and as
+specified; it was used for all four performances of the production. As
+all things in theater, it was transient, being disassembled shortly
+after the show.
+
+Our show was commended by critics for the technical feat. There are
+awards for high school theatrical productions in northern Virginia,
+the "Cappies", and the Grid would have won in a technical category had
+a pandemic not abruptly truncated the school year in March 2020. At my
+school, technical theater was the extracurricular activity where real
+engineering happened, and this was by far the largest project ever
+attempted by our school's theater department. I hazard that it will
+remain unmatched.
+
+While I led the project, I also worked with a fantastic team of other
+people, without whom this project would not have been possible. We
+assembled something truly great together. One particular colleague of
+mine contributed more than any other to the Grid. She personally wrote
+thousands of lines of code to create the Grid client software, a
+crucial part of the system that would not have otherwise come to
+fruition. This is only the most notable of her efforts, and I give her
+full credit for the client software.
+
+This repository's top level directory is divided into a few
+folders. The directories =structure=, =electronics=, and =software=
+contain resources relevant to those aspects of the project,
+respectively. The =media= directory holds a curated selection of
+dozens of pictures and videos which exhibit the Grid in action. The
+other files in this top directory are relevant to the entire
+project. In the Bill of Materials is a listing of all the components
+and tools used to assemble the lighting system. There is also a
+diagram of the control architecture, and my first design document for
+the Grid.
 
 
 * Project Goals
