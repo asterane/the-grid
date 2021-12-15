@@ -1,0 +1,12 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+<ul class="posts">
+  {{ range .Pages.ByPublishDate.Reverse }}
+  <li><span>{{ .PublishDate.Format "Jan 2 2006" }}</span>
+    <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a>
+  </li>
+  {{ end }}
+</ul>
+
+{{ end }}

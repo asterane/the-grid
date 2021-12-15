@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Grid on asterane</title>
+    <link>https://asterane.github.io/the-grid/</link>
+    <description>Recent content in The Grid on asterane</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 Dec 2021 15:17:47 -0700</lastBuildDate><atom:link href="https://asterane.github.io/the-grid/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>System</title>
+      <link>https://asterane.github.io/the-grid/system/</link>
+      <pubDate>Wed, 15 Dec 2021 15:17:47 -0700</pubDate>
+      
+      <guid>https://asterane.github.io/the-grid/system/</guid>
+      <description>a</description>
+    </item>
+    
+    <item>
+      <title>Structure</title>
+      <link>https://asterane.github.io/the-grid/structure/</link>
+      <pubDate>Wed, 15 Dec 2021 15:17:47 -0700</pubDate>
+      
+      <guid>https://asterane.github.io/the-grid/structure/</guid>
+      <description>a</description>
+    </item>
+    
+    <item>
+      <title>Electronics</title>
+      <link>https://asterane.github.io/the-grid/electronics/</link>
+      <pubDate>Wed, 15 Dec 2021 15:17:48 -0700</pubDate>
+      
+      <guid>https://asterane.github.io/the-grid/electronics/</guid>
+      <description>a</description>
+    </item>
+    
+    <item>
+      <title>Software</title>
+      <link>https://asterane.github.io/the-grid/software/</link>
+      <pubDate>Wed, 15 Dec 2021 15:17:48 -0700</pubDate>
+      
+      <guid>https://asterane.github.io/the-grid/software/</guid>
+      <description>a</description>
+    </item>
+    
+    <item>
+      <title>Reflection</title>
+      <link>https://asterane.github.io/the-grid/reflection/</link>
+      <pubDate>Wed, 15 Dec 2021 15:17:48 -0700</pubDate>
+      
+      <guid>https://asterane.github.io/the-grid/reflection/</guid>
+      <description>a</description>
+    </item>
+    
+  </channel>
+</rss>

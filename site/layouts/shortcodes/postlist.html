@@ -1,0 +1,21 @@
+{{ if len .Params | eq 0 }}
+<ul class="posts">
+  {{ range (where .Site.RegularPages "Section" "==" "posts").ByPublishDate.Reverse }}
+  <li><span>{{ .PublishDate.Format "Jan 2 2006" }}</span>
+    <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a>
+  </li>
+  {{ end }}
+</ul>
+{{ else }}
+<ul class="posts">
+  {{ range first (.Get 0) (where .Site.RegularPages "Section" "==" "posts").ByPublishDate.Reverse }}
+  <div class="post_info">
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <span>({{ .PublishDate.Format "2006-01-02" }})</span>
+    </li>
+    <p>{{ .Summary }}</p>
+  </div>
+  {{ end }}
+</ul>
+{{ end }}

@@ -1,0 +1,61 @@
+#+HUGO_SECTION: ./
+#+HUGO_BASE_DIR: ../
+
+#+HUGO_WEIGHT: auto
+#+HUGO_AUTO_SET_LASTMOD: t
+
+#+STARTUP: overview
+
+* Pages
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: /
+:END:
+
+a
+
+** The Grid
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:END:
+
+Work in progress...
+
+*** Overview
+
+a
+
+** System
+:PROPERTIES:
+:EXPORT_FILE_NAME: system
+:END:
+
+a
+
+** Structure
+:PROPERTIES:
+:EXPORT_FILE_NAME: structure
+:END:
+
+a
+
+** Electronics
+:PROPERTIES:
+:EXPORT_FILE_NAME: electronics
+:END:
+
+a
+
+** Software
+:PROPERTIES:
+:EXPORT_FILE_NAME: software
+:END:
+
+a
+
+** Reflection
+:PROPERTIES:
+:EXPORT_FILE_NAME: reflection
+:END:
+
+a
+
